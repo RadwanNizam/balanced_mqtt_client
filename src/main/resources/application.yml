@@ -1,0 +1,23 @@
+spring:
+  cloud:
+    stream:
+      bindings:
+        message-sink :
+         destination: amq.topic
+         binder: rabbit
+         group: messages-consumer-group
+         consumer :
+           concurrency: 1
+      rabbit:
+        bindings:
+          message-sink:
+            consumer:
+              durableSubscription: true
+              declareExchange: true
+              exchangeDurable: true
+              exchangeType: topic
+              queueNameGroupOnly: true
+  rabbitmq:
+    host: xxx.xxx.xxx.xxx
+    password: client1
+    username: client1
